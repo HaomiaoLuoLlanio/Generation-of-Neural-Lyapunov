@@ -1,0 +1,61 @@
+% Using numerical method to simulate the system
+% dot_x1 = -x1 + x2
+% dot_x2 = (x1 + x2) * sin(x1) - 3 * x2
+% clear all;
+% x1 = []; x2 = [];
+
+% x1(1) = -rand(1,1); x2(1) = rand(1,1); % the initial condition of Dynamic system
+% t = linspace(0,20,1000);
+% delta = 0.01;
+% get the trajactory with different variables x1, x2
+% for j = 1: length(t) - 1        % In here, we only used the Euler Method, waiting for accuacy by other methods
+    % x1(j+1) = x1(j) + delta * (-x1(j) + x2(j));
+    % x2(j+1) = x2(j) + delta * ((x1(j) + x2(j)) * sin(x1(j)) - 3 * x2(j));
+% end 
+% figure(1)
+% plot(t, x1, t, x2);xlabel('time');
+
+
+%% Generate  state trajactories with different initial condition
+trjcty = {};
+for j = 1 : 10
+% Using numerical method to simulate the system
+% dot_x1 = -x1 + x2
+% dot_x2 = (x1 + x2) * sin(x1) - 3 * x2
+x1 = []; x2 = [];
+x1(1) = -rand(1,1); x2(1) = rand(1,1); % the initial condition of Dynamic system
+t = linspace(0,20,1000);
+delta = 0.01;
+% get the trajactory with different variables x1, x2
+    for i = 1: length(t) - 1        % In here, we only used the Euler Method, waiting for accuacy by other methods
+    x1(j+1) = x1(j) + delta * (-x1(j) + x2(j));
+    x2(j+1) = x2(j) + delta * ((x1(j) + x2(j)) * sin(x1(j)) - 3 * x2(j));
+    end
+trjcty{j,1} = x1; trjcty{j,2} = x2;
+end
+
+%% Assigned the value of the Lyapunov function
+V = []; a1 = 0.5; a2 = 0.5; a3 = 1.2;
+V = LyapunovFunc(a1, a2, a3, x1, x2);
+
+
+% plot some diagram
+figure(2);
+plot3(x1, x2, V); grid on; xlabel('x1'); ylabel('x2'); zlabel('V');title('state trajactory');
+figure(3);
+[X1, X2] = meshgrid(-1:0.1:1, -1:0.1:1);
+V_surf = Vsurf(a1, a2, a3, X1, X2);
+surf(X1, X2, V_surf);
+        
+%% generate the coefficients of basis
+% the polynominal function is that V(x) = a1*x1^2 + a2*x2^2 + a3*x1*x2
+function V = LyapunovFunc(a1, a2, a3, x1, x2)
+for i = 1:length(x1)
+    V(i) = a1 * (x1(i))^2 + a2 * (x2(i))^2 + a3 * x1(i) * x2(i);
+end 
+
+%% surface function
+end 
+function V = Vsurf(a1, a2, a3, X1, X2)
+V = a1 * X1.^2 + a2 * X2.^2 +a3 .* X1 .*X2;
+end 
