@@ -13,6 +13,8 @@ eta = 0.02; a = 0.001;
 % v1 = w1.*sigmoid(z1);
 % z2 = v1.*w2;
 % V = z2;
+
+
 %% time derivative of the Lyapunov function
 % grediant V 
 % g_V = w2*diag(dsigmoid(w1*z0))*w1;
@@ -29,6 +31,8 @@ L =[]; total_L =[];
 time =1;
 L(1) = 1; total_L(1) = 1; dimension = 1;
 A =[]; A(1) = 1; w2_1 = []; w2_2 = [];
+
+
 %% training untile the network is converaged
 while (abs(A(time))>0.01)
     total_L(time + 1) = 0;
@@ -54,6 +58,7 @@ time = time + 1;
 w2_1(time) = w2(1,1);
 w2_2(time) = w2(2,1);
 end 
+
 
 %% plot the Lyapunov function
 % V(x1,x2) = v1'*w2
