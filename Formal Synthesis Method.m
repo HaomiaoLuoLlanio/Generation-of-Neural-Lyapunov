@@ -82,6 +82,7 @@ figure(2);grid on;
 subplot(211);contour(X,Y,V_plot,'ShowText','on');xlabel('x');ylabel('y');title('contour plot of V');
 subplot(212);contour(X,Y,dV_plot,'ShowText','on');xlabel('x');ylabel('y');title('contour plot of dV/dt');
 
+
 figure(3); t = linspace(1,time,time);
 plot(t, w2_1);hold on;
 plot(t, w2_2);
