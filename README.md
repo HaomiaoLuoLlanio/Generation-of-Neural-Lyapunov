@@ -1,2 +1,2 @@
 # Generation-of-Neural-Lyapunov
-This a project what I am recently doing. It is about using neural network to generate lyapunov function in order to control a branch of complex dynamic systems. There are some code in my page which use different ways to generate the stablize function.
+This a project what I am recently doing. It is about using neural networks to generate Lyapunov function in order to control nonlinear dynamic systems. There are some code in my page which use a neural network in different ways to generate Lyapunov function to stablize the nonlinear dynamic system.
